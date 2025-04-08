@@ -11,7 +11,7 @@ import { UserResolver } from './user.resolver';
 import { FormBuilderComponent } from './components/form-builder/form-builder.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/crud', pathMatch: 'full' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   {
     path: 'crud',
     loadComponent: () =>

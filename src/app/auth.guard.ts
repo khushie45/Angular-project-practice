@@ -3,7 +3,7 @@ import { CanActivateFn, Router } from '@angular/router';
 
 export const AuthGuard: CanActivateFn = () => {
   const router = inject(Router);
-  const isLoggedIn = false;
+  const isLoggedIn = true;
 
   if (!isLoggedIn) {
     console.log('Auth failed');

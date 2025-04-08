@@ -65,4 +65,8 @@ export class HomeComponent {
   goToFormBuilder() {
     this.router.navigate(['/home/formBuilder']);
   }
+
+  goToDynamicRoute() {
+    this.router.navigate(['/user/khushi']);
+  }
 }
