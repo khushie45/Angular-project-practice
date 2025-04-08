@@ -1,0 +1,77 @@
+<mat-progress-spinner
+  *ngIf="loading$ | async"
+  mode="indeterminate"
+></mat-progress-spinner>
+
+<div class="header">
+  <h1>Product List</h1>
+  <button mat-raised-button color="primary" (click)="openDialog()">
+    Add Product
+  </button>
+</div>
+
+<mat-table [dataSource]="dataSource" matSort>
+  <ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+    <mat-cell *matCellDef="let product">{{ product.id }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="title">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Title </mat-header-cell>
+    <mat-cell *matCellDef="let product">{{ product.title }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="description">
+    <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+    <mat-cell *matCellDef="let product">
+      <span class="truncate-text" [matTooltip]="product.description">
+        {{ product.description }}
+      </span>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="price">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Price </mat-header-cell>
+    <mat-cell *matCellDef="let product">{{
+      product.price | currency
+    }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="category">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>
+      Category
+    </mat-header-cell>
+    <mat-cell *matCellDef="let product">{{ product.category }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="addToCart">
+    <mat-header-cell *matHeaderCellDef> Add to Cart </mat-header-cell>
+    <mat-cell *matCellDef="let product">
+      <button mat-button (click)="onAddToCart(product)">Add to Cart</button>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="edit">
+    <mat-header-cell *matHeaderCellDef> Edit </mat-header-cell>
+    <mat-cell *matCellDef="let product">
+      <button mat-button (click)="openDialog(product)">Edit</button>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="delete">
+    <mat-header-cell *matHeaderCellDef> Delete </mat-header-cell>
+    <mat-cell *matCellDef="let product">
+      <button mat-button (click)="onDeleteProduct(product.id)">Delete</button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+</mat-table>
+
+<mat-paginator
+  [pageSize]="5"
+  [pageSizeOptions]="[5, 10, 20]"
+  showFirstLastButtons
+>
+</mat-paginator>

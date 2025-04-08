@@ -1,0 +1,44 @@
+<form [formGroup]="productForm">
+  <h2 mat-dialog-title>{{ data ? "Edit Product" : "Add Product" }}</h2>
+  <mat-form-field appearance="fill">
+    <mat-label>Title</mat-label>
+    <input matInput formControlName="title" />
+    <mat-error *ngIf="productForm.get('title')?.hasError('required')">
+      Title is required
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Price</mat-label>
+    <input matInput formControlName="price" type="number" />
+    <mat-error *ngIf="productForm.get('price')?.hasError('required')">
+      Price is required
+    </mat-error>
+    <mat-error *ngIf="productForm.get('price')?.hasError('min')">
+      Price must be greater than 10
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Category</mat-label>
+    <input matInput formControlName="category" />
+    <mat-error *ngIf="productForm.get('category')?.hasError('required')">
+      Category is required
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Description</mat-label>
+    <textarea matInput formControlName="description"></textarea>
+    <mat-error *ngIf="productForm.get('description')?.hasError('required')">
+      Description is required
+    </mat-error>
+  </mat-form-field>
+
+  <div mat-dialog-actions>
+    <button mat-button (click)="onCancel()">Cancel</button>
+    <button mat-button (click)="onSave()" [disabled]="productForm.invalid">
+      Save
+    </button>
+  </div>
+</form>

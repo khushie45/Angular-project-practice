@@ -1,0 +1,25 @@
+<h3>Todos List</h3>
+<!-- old way for conditional renedering ngIf, ngSwitch.. (structural directive) -->
+<p *ngIf="!todoItems().length">Loading...</p>
+
+<!-- new way is using conditional blocks (control flow blocks) @if, @for... -->
+@if (!todoItems().length) {
+<p>Loading...</p>
+}
+
+<form>
+  <label for="filterTodos">Filter Todos: </label>
+  <input
+    type="text"
+    name="filterTodos"
+    id="filterTodos"
+    placeholder="Search todos..."
+    [(ngModel)]="searchTerm"
+  />
+</form>
+
+<ul>
+  @for (todo of todoItems() | filteredTodos: searchTerm(); track todo.id) {
+  <app-todo-item [todo]="todo" (todoToggled)="updateTodoToggled($event)" />
+  }
+</ul>

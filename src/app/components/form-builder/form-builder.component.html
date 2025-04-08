@@ -1,0 +1,33 @@
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+  <label>Username: <span style="color: red">*</span></label>
+  <input type="text" formControlName="username" />
+  <p
+    *ngIf="
+      profileForm.get('username')?.invalid &&
+      profileForm.get('username')?.touched
+    "
+  >
+    {{ getError("username") }}
+  </p>
+
+  <label>Email: <span style="color: red">*</span></label>
+  <input type="email" formControlName="email" />
+  <p
+    *ngIf="
+      profileForm.get('email')?.invalid && profileForm.get('email')?.touched
+    "
+  >
+    {{ getError("email") }}
+  </p>
+
+  <label>Skills:</label>
+  <div formArrayName="skills">
+    <div *ngFor="let skill of skills.controls; let i = index">
+      <input type="text" [formControlName]="i" />
+      <button type="button" (click)="removeSkill(i)">Remove</button>
+    </div>
+  </div>
+  <button type="button" (click)="addSkill()">Add Skill</button>
+
+  <button type="submit" [disabled]="profileForm.invalid">Submit</button>
+</form>

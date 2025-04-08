@@ -1,0 +1,14 @@
+<header>
+  <span routerLink="/">{{ title() }}</span>
+  <div class="cart">
+    <p>Cart items</p>
+    <span class="count" *ngIf="cartCount$ | async as cartCount">{{ cartCount }}</span>
+  </div>
+  <nav>
+    <ul>
+      <li routerLink="/todos">Todos</li>
+      <li routerLink="/form">Form</li>
+      <li routerLink="/template-form">Template Driven Form</li>
+    </ul>
+  </nav>
+</header>

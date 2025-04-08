@@ -1,0 +1,16 @@
+<h1>Home Component</h1>
+<app-greeting [greetingsMessage]="greetingsMessageFromParent()" />
+<app-counter />
+<br />
+<input type="text" (keyup)="keyUpHandler($event)" />
+<p>User pressed {{ pressedKey }}.</p>
+<br />
+<app-lifecycle-demo
+  [value]="counter"
+  (valueChange)="updateCounter($event)"
+  #user
+/>
+<button (click)="incrementCounter()">Change Input Value (Parent)</button>
+<h1 class="dashboard" (click)="goToDashboard()">Go to dashboard</h1>
+<h1 class="dashboard" (click)="goToFormBuilder()">Go to form builder</h1>
+<router-outlet />
